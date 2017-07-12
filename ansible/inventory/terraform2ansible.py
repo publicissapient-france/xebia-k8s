@@ -40,8 +40,11 @@ for m in state["modules"]:
             addressable_host = attributes["private_ip"]
             index = int(m.group(2))
             hostname = "%s%d" % (tf_group, index + 1)
+            attributes["ansible_hostname"] = hostname
             attributes["hostname"] = hostname
             attributes["ansible_ssh_host"] = attributes["private_ip"]
+            attributes["ip"] = attributes["private_ip"]
+#            attributes["ansible_default_ipv4"] = attributes["private_ip"]
             if "hosts" not in inventory[tf_group]:
                 inventory[tf_group]["hosts"] = []
 
