@@ -1,0 +1,13 @@
+Host 10.*
+    ProxyCommand ssh -F ssh_config -W %h:%p bastion
+    IdentityFile ssh/rsakey
+
+Host bastion
+    Hostname bastion.k8s.techx.fr
+    User ubuntu
+    IdentityFile ssh/rsakey
+
+Host *
+    ControlMaster auto
+    ControlPath ~/.ssh/ansible-%r@%h:%p
+    ControlPersist 5m
