@@ -2,7 +2,6 @@ resource "aws_key_pair" "default" {
   public_key = "${file("ssh/rsakey.pub")}"
 }
 
-
 resource "aws_instance" "bastion" {
   subnet_id = "${data.terraform_remote_state.infra.public_subnet}"
   ami       = "${var.bastion_ami}"

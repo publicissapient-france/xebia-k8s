@@ -1,5 +1,5 @@
 variable bastion_ami {
-  type = "string"
+  type    = "string"
   default = "ami-1c45e273"
 }
 
