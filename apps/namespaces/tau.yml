@@ -1,0 +1,15 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: tau-dev
+  labels:
+    name: tau-dev
+
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: tau-prod
+  labels:
+    name: tau-prod
