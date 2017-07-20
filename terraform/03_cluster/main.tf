@@ -21,3 +21,7 @@ provider "aws" {
 resource "aws_key_pair" "default" {
   public_key = "${file("ssh/rsakey.pub")}"
 }
+
+data "aws_route53_zone" "public_dns" {
+  name = "${var.public_domain}"
+}

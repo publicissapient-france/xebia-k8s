@@ -11,7 +11,7 @@ resource "aws_instance" "master" {
     "${aws_security_group.allow_bastion.id}",
     "${aws_security_group.allow_elb.id}"
   ]
-
+  iam_instance_profile = "${aws_iam_instance_profile.kube-master.id}"
   provisioner "remote-exec" {
     inline = "sleep 1"
 
@@ -61,9 +61,6 @@ resource "aws_elb" "master" {
   security_groups = ["${aws_security_group.allow_elb.id}"]
 }
 
-data "aws_route53_zone" "public_dns" {
-  name = "${var.public_domain}"
-}
 
 resource "aws_route53_record" "master-dns" {
   zone_id = "${data.aws_route53_zone.public_dns.id}"
