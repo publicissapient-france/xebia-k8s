@@ -1,6 +1,7 @@
 Host 10.*
     ProxyCommand ssh -F ssh_config -W %h:%p bastion
     IdentityFile ssh/rsakey
+    User ubuntu
 
 Host bastion
     Hostname bastion.k8s.techx.fr
