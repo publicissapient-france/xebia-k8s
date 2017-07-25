@@ -1,0 +1,23 @@
+mons:
+  children::
+    ceph:
+
+osds:
+  children::
+    ceph:
+
+etcd:
+  hosts:
+    master1:
+    master2:
+    master3:
+
+kube-node:
+  children:
+    node:
+
+k8s-cluster:
+  children:
+    kube-node:
+    kube-master:
+

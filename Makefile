@@ -7,11 +7,12 @@ bastion::
 cluster::
 	@terraform apply -state terraform/03_cluster.tfstate terraform/03_cluster
 
+
 cluster-destroy::
 	@terraform destroy -state terraform/03_cluster.tfstate terraform/03_cluster
 
-requirements:
-	@ansible-galaxy install -r requirements.yml
+ceph::
+	@terraform apply -state terraform/04_ceph.tfstate terraform/04_ceph
 
 destroy:
 	@terraform destroy -force terraform
