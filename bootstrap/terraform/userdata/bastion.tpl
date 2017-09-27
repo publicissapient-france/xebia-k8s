@@ -18,4 +18,6 @@ curl -o /usr/local/bin/kubectl -L https://storage.googleapis.com/kubernetes-rele
 mkdir -p $KUBESPRAY_REPO_DIR && \
     git clone $KUBESPRAY_REPO_URL $KUBESPRAY_REPO_DIR && \
     cd $KUBESPRAY_REPO_DIR && \
-    git checkout ${kubespray_version}
+    git checkout ${kubespray_version} && \
+    chown root:ubuntu -R $KUBESPRAY_REPO_DIR && \
+    chmod u=rwX,g=rwX,o=rX -R $KUBESPRAY_REPO_DIR
