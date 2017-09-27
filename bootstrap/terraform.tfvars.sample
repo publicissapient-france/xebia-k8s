@@ -1,0 +1,17 @@
+// General
+project_name = "xebia-k8s-edge"
+owner = "tauffredou@xebia.fr"
+
+// Infra
+cidr_block = "10.0.0.0/16"
+subnet_block_size = "2"
+
+ami = "ami-a74c95c8"
+region = "eu-central-1"
+public_domain = "techx.fr."
+public_subdomain = "k8s"
+
+terraform_version = "0.10.6"
+ansible_version = "2.3.2"
+kubectl_version = "v1.7.6"
+kubespray_version = "v2.2.0"

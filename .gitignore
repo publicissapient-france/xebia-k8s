@@ -1,5 +1,8 @@
 .idea
-terraform/*.tfstate*
+
+.terraform
+*.tfstate*
 terraform.tfvars
-ssh/*
+
+bootstrap/terraform/files/ssh/*
 !/ssh/.gitkeep
