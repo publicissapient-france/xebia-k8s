@@ -1,0 +1,30 @@
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: nfs-web
+  labels:
+    app: nfs-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nfs-web
+  template:
+    metadata:
+      labels:
+        app: nfs-web
+    spec:
+      containers:
+      - name: nfs-web
+        image: nginx
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: nfs
+      volumes:
+        - name: nfs
+          persistentVolumeClaim:
+            claimName: nfs

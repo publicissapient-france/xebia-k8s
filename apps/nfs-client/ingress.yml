@@ -1,0 +1,16 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nfs-web
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: nfs-web.k8s.techx.fr
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nfs-web
+          servicePort: http
