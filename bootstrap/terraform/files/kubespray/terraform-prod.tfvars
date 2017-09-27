@@ -10,7 +10,7 @@ AWS_DEFAULT_REGION = "eu-west-1"
 aws_vpc_cidr_block = "10.250.192.0/18"
 aws_cidr_subnets_private = ["10.250.192.0/20","10.250.208.0/20"]
 aws_cidr_subnets_public = ["10.250.224.0/20","10.250.240.0/20"]
-aws_avail_zones = ["eu-central-1a","eu-central-1b"]
+aws_avail_zones = ["eu-west-1a","eu-west-1b"]
 
 # Bastion Host
 aws_bastion_ami = "ami-5900cc36"
