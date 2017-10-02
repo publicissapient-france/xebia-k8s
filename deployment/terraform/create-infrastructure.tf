@@ -56,6 +56,14 @@ resource "aws_instance" "bastion-server" {
   availability_zone = "${element(var.aws_avail_zones,count.index)}"
   subnet_id = "${element(module.aws-vpc.aws_subnet_ids_public,count.index)}"
 
+  provisioner "remote-exec" {
+    inline = "sleep 1"
+
+    connection {
+      user = "ubuntu"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey.pub")}"
+    }
+  }
 
   vpc_security_group_ids = [
     "${module.aws-vpc.aws_security_group}"]
@@ -90,18 +98,26 @@ resource "aws_instance" "k8s-master" {
 
   count = "${var.aws_kube_master_num}"
 
-
   availability_zone = "${element(var.aws_avail_zones,count.index)}"
   subnet_id = "${element(module.aws-vpc.aws_subnet_ids_private,count.index)}"
 
-
   vpc_security_group_ids = [
-    "${module.aws-vpc.aws_security_group}"]
+    "${module.aws-vpc.aws_security_group}"
+  ]
 
 
   iam_instance_profile = "${module.aws-iam.kube-master-profile}"
   key_name = "${aws_key_pair.default.key_name}"
 
+  provisioner "remote-exec" {
+    inline = "sleep 1"
+
+    connection {
+      user = "ubuntu"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey.pub")}"
+      bastion_host = "${aws_instance.bastion-server.public_dns}"
+    }
+  }
 
   tags {
     Name = "kubernetes-${var.aws_cluster_name}-master${count.index}"
@@ -123,16 +139,23 @@ resource "aws_instance" "k8s-etcd" {
 
   count = "${var.aws_etcd_num}"
 
-
   availability_zone = "${element(var.aws_avail_zones,count.index)}"
   subnet_id = "${element(module.aws-vpc.aws_subnet_ids_private,count.index)}"
-
 
   vpc_security_group_ids = [
     "${module.aws-vpc.aws_security_group}"]
 
   key_name = "${aws_key_pair.default.key_name}"
 
+  provisioner "remote-exec" {
+    inline = "sleep 1"
+
+    connection {
+      user = "ubuntu"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey.pub")}"
+      bastion_host = "${aws_instance.bastion-server.public_dns}"
+    }
+  }
 
   tags {
     Name = "kubernetes-${var.aws_cluster_name}-etcd${count.index}"
@@ -158,6 +181,15 @@ resource "aws_instance" "k8s-worker" {
   iam_instance_profile = "${module.aws-iam.kube-worker-profile}"
   key_name = "${aws_key_pair.default.key_name}"
 
+  provisioner "remote-exec" {
+    inline = "sleep 1"
+
+    connection {
+      user = "ubuntu"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey.pub")}"
+      bastion_host = "${aws_instance.bastion-server.public_dns}"
+    }
+  }
 
   tags {
     Name = "kubernetes-${var.aws_cluster_name}-worker${count.index}"
