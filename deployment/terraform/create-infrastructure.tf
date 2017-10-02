@@ -115,7 +115,7 @@ resource "aws_instance" "k8s-master" {
     connection {
       user = "ubuntu"
       private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
-      bastion_host = "${aws_instance.bastion-server.public_dns}"
+      bastion_host = "${aws_route53_record.bastion-server.fqdn}"
     }
   }
 
@@ -153,7 +153,7 @@ resource "aws_instance" "k8s-etcd" {
     connection {
       user = "ubuntu"
       private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
-      bastion_host = "${aws_instance.bastion-server.public_dns}"
+      bastion_host = "${aws_route53_record.bastion-server.fqdn}"
     }
   }
 
@@ -187,7 +187,7 @@ resource "aws_instance" "k8s-worker" {
     connection {
       user = "ubuntu"
       private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
-      bastion_host = "${aws_instance.bastion-server.public_dns}"
+      bastion_host = "${aws_route53_record.bastion-server.fqdn}"
     }
   }
 
