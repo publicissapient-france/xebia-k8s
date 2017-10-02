@@ -7,9 +7,8 @@ resource "aws_security_group" "allow_bastion" {
     to_port = 22
     protocol = "tcp"
 
-    security_groups = [
-      "${data.terraform_remote_state.bastion.bastion_sg}",
-    ]
+    cidr_blocks = ["${var.bastion_ip}"]
+
   }
 
   ingress {

@@ -13,3 +13,7 @@ variable "public_domain" {}
 variable "public_subdomain" {}
 
 variable "node_count" {}
+
+variable "bastion_ip" {
+  default = "10.0.90.208"
+}

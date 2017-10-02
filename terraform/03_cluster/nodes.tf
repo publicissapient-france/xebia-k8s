@@ -23,7 +23,7 @@ resource "aws_instance" "node" {
     connection {
       user = "ubuntu"
       private_key = "${file("ssh/rsakey")}"
-      bastion_host = "${data.terraform_remote_state.bastion.bastion_addr}"
+      bastion_host = "${var.bastion_ip}"
     }
   }
 
