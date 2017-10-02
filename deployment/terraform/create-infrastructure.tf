@@ -61,7 +61,7 @@ resource "aws_instance" "bastion-server" {
 
     connection {
       user = "ubuntu"
-      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/properties/ssh/rsakey")}"
     }
   }
 
@@ -114,7 +114,7 @@ resource "aws_instance" "k8s-master" {
 
     connection {
       user = "ubuntu"
-      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/properties/ssh/rsakey")}"
       bastion_host = "${aws_route53_record.bastion-server.fqdn}"
     }
   }
@@ -152,7 +152,7 @@ resource "aws_instance" "k8s-etcd" {
 
     connection {
       user = "ubuntu"
-      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/properties/ssh/rsakey")}"
       bastion_host = "${aws_route53_record.bastion-server.fqdn}"
     }
   }
@@ -188,7 +188,7 @@ resource "aws_instance" "k8s-worker" {
 
     connection {
       user = "ubuntu"
-      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/properties/ssh/rsakey")}"
       bastion_host = "${aws_route53_record.bastion-server.fqdn}"
     }
   }
@@ -224,13 +224,35 @@ data "template_file" "inventory" {
 
 }
 
+data "template_file" "bastion-ssh-configuration" {
+  template = "${file("${path.module}/templates/ssh-config.tpl")}"
+
+  vars {
+    public_ip_address_bastion = "${aws_route53_record.bastion-server.fqdn}"
+    config_path = "${var.config_root_path}/${var.aws_cluster_name}"
+  }
+
+}
+
 resource "null_resource" "inventories" {
   provisioner "local-exec" {
-    command = "mkdir -p ${var.config_root_path}/${var.aws_cluster_name}/inventory && echo '${data.template_file.inventory.rendered}' > ${var.config_root_path}/${var.aws_cluster_name}/inventory/hosts"
+    command = "mkdir -p ${var.config_root_path}/${var.aws_cluster_name}/properties/inventory && echo '${data.template_file.inventory.rendered}' > ${var.config_root_path}/${var.aws_cluster_name}/properties/inventory/hosts"
   }
 
   triggers {
     template = "${data.template_file.inventory.rendered}"
+  }
+
+}
+
+resource "null_resource" "bastion-ssh-configuration" {
+
+  provisioner "local-exec" {
+    command = "mkdir -p ${var.config_root_path}/${var.aws_cluster_name}/properties/ssh && echo '${data.template_file.bastion-ssh-configuration.rendered}' > ${var.config_root_path}/${var.aws_cluster_name}/properties/ssh/ssh-bastion.conf"
+  }
+
+  triggers {
+    template = "${data.template_file.bastion-ssh-configuration.rendered}"
   }
 
 }
