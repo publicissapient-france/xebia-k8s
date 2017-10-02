@@ -1,5 +1,5 @@
 resource "aws_instance" "node" {
-  count = "3"
+  count = "${var.node_count}"
   subnet_id = "${data.terraform_remote_state.infra.private_subnet}"
   ami = "${var.ami}"
 

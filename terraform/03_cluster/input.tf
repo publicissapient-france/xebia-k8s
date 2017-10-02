@@ -11,3 +11,5 @@ variable "instance_type" {}
 variable "public_domain" {}
 
 variable "public_subdomain" {}
+
+variable "node_count" {}
