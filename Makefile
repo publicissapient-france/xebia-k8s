@@ -19,7 +19,7 @@ ceph::
 	@terraform apply -state terraform/04_ceph.tfstate terraform/04_ceph
 
 destroy:
-	@terraform destroy -force terraform
+	@terraform destroy -state terraform/01_infra.tfstate terraform/01_infra
 
 k8s::
 	@ansible-playbook --flush-cache kubespray/cluster.yml
