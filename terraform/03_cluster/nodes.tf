@@ -17,16 +17,6 @@ resource "aws_instance" "node" {
     "${aws_security_group.allow_elb.id}"
   ]
 
-  provisioner "remote-exec" {
-    inline = "sleep 1"
-
-    connection {
-      user = "ubuntu"
-      private_key = "${file("ssh/rsakey")}"
-      bastion_host = "${var.bastion_ip}"
-    }
-  }
-
   tags {
     Name = "${var.project_name} - node${count.index + 1}"
     Group = "${var.project_name}"

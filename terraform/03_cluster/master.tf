@@ -12,15 +12,6 @@ resource "aws_instance" "master" {
     "${aws_security_group.allow_elb.id}"
   ]
   iam_instance_profile = "${aws_iam_instance_profile.kube-master.id}"
-  provisioner "remote-exec" {
-    inline = "sleep 1"
-
-    connection {
-      user = "ubuntu"
-      private_key = "${file("ssh/rsakey")}"
-      bastion_host = "${var.bastion_ip}"
-    }
-  }
 
   tags {
     Name = "${var.project_name} - main ${count.index + 1}"
