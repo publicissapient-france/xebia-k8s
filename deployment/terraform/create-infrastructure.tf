@@ -61,7 +61,7 @@ resource "aws_instance" "bastion-server" {
 
     connection {
       user = "ubuntu"
-      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey.pub")}"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
     }
   }
 
@@ -114,7 +114,7 @@ resource "aws_instance" "k8s-master" {
 
     connection {
       user = "ubuntu"
-      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey.pub")}"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
       bastion_host = "${aws_instance.bastion-server.public_dns}"
     }
   }
@@ -152,7 +152,7 @@ resource "aws_instance" "k8s-etcd" {
 
     connection {
       user = "ubuntu"
-      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey.pub")}"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
       bastion_host = "${aws_instance.bastion-server.public_dns}"
     }
   }
@@ -186,7 +186,7 @@ resource "aws_instance" "k8s-worker" {
 
     connection {
       user = "ubuntu"
-      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey.pub")}"
+      private_key = "${file("${var.config_root_path}/${var.aws_cluster_name}/ssh/rsakey")}"
       bastion_host = "${aws_instance.bastion-server.public_dns}"
     }
   }
