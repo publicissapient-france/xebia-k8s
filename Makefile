@@ -18,7 +18,7 @@ ceph::
 	@terraform init terraform/04_ceph
 	@terraform apply -state terraform/04_ceph.tfstate terraform/04_ceph
 
-destroy:
+infra-destroy:
 	@terraform destroy -state terraform/01_infra.tfstate terraform/01_infra
 
 k8s::
