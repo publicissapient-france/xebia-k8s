@@ -224,7 +224,7 @@ data "template_file" "inventory" {
 
 resource "null_resource" "inventories" {
   provisioner "local-exec" {
-    command = "echo '${data.template_file.inventory.rendered}' > ${var.config_root_path}/${var.aws_cluster_name}/inventory/hosts"
+    command = "mkdir -p ${var.config_root_path}/${var.aws_cluster_name}/inventory && echo '${data.template_file.inventory.rendered}' > ${var.config_root_path}/${var.aws_cluster_name}/inventory/hosts"
   }
 
   triggers {
