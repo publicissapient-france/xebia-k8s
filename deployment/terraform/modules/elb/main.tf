@@ -61,5 +61,6 @@ resource "aws_route53_record" "aws-elb-api" {
   name = "api.${var.aws_cluster_name}"
   records = ["${aws_elb.aws-elb-api.dns_name}"]
   type = "CNAME"
+  ttl = "60"
   zone_id = "${var.public_domain_zone_id}"
 }

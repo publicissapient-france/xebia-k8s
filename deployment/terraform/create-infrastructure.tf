@@ -72,8 +72,10 @@ resource "aws_instance" "bastion-server" {
 resource "aws_route53_record" "bastion-server" {
   name = "bastion.${var.aws_cluster_name}"
   records = [
-    "${aws_instance.bastion-server.*.public_dns}"]
+    "${aws_instance.bastion-server.*.public_dns}"
+  ]
   type = "CNAME"
+  ttl = "60"
   zone_id = "${data.aws_route53_zone.public_dns.zone_id}"
 }
 
