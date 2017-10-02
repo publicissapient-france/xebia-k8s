@@ -53,14 +53,18 @@ current-context: xebia
 ```
 
 # 5 - Initialize Terraform modules
+
 ```
 terraform init
 ```
 
+# 6 - Generate SSH key for your cluster
+
 ```
-make infra
+ssh-keygen -f ssh/rsakey
 ```
 
+# 7 - Create the cluster
 ```
 make gateway
 ```
