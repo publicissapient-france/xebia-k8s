@@ -181,6 +181,8 @@ resource "aws_instance" "k8s-worker" {
   iam_instance_profile = "${module.aws-iam.kube-worker-profile}"
   key_name = "${aws_key_pair.default.key_name}"
 
+  source_dest_check = false
+
   provisioner "remote-exec" {
     inline = "sleep 1"
 
