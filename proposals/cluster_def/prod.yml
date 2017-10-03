@@ -1,0 +1,16 @@
+---
+apiVersion: clusters/v1alpha
+kind: Cluster
+metadata:
+  name: prod
+spec:
+  properties:
+    ref: https://github.com/xebia-france/xebia-k8s-properties.git
+    tag: v1.0
+  provisioning:
+      ref: https://github.com/xebia-france/xebia-k8s.git
+      tag: v1.0
+  kubespray:
+      ref: https://github.com/kubernetes-incubator/kubespray.git
+      tag: v1.0
+

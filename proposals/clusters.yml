@@ -1,3 +1,4 @@
+workdir: /srv/k8s-clusters
 clusters:
     prod:
         properties:
@@ -19,4 +20,3 @@ clusters:
         kubespray:
             ref: https://github.com/kubernetes-incubator/kubespray.git
             tag: v1.0
-
