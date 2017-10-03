@@ -4,6 +4,7 @@ clusters:
         properties:
             ref: https://github.com/xebia-france/xebia-k8s-properties.git
             tag: v1.0
+            key: /local/path/to/the/key
         provisioning:
             ref: https://github.com/xebia-france/xebia-k8s.git
             tag: v1.0
@@ -14,6 +15,7 @@ clusters:
         properties:
             ref: https://github.com/xebia-france/xebia-k8s-properties.git
             tag: v1.0
+            key: /local/path/to/the/key
         provisioning:
             ref: https://github.com/xebia-france/xebia-k8s.git
             tag: v1.0
