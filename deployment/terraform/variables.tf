@@ -106,3 +106,7 @@ variable "k8s_secure_api_port" {
 variable "loadbalancer_apiserver_address" {
     description= "Bind Address for ELB of K8s API Server"
 }
+
+variable "s3_bucket" {
+  description = "S3 bucket used for remote states"
+}
