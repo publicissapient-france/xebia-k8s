@@ -3,10 +3,4 @@ resource "aws_key_pair" "default" {
   key_name_prefix = "${var.aws_cluster_name}"
 }
 
-terraform {
-  backend "s3" {
-    bucket = "${var.s3_bucket}"
-    key    = "${var.aws_cluster_name}"
-    region = "${var.AWS_DEFAULT_REGION}"
-  }
-}
+
