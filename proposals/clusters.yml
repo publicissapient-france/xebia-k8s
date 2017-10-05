@@ -2,23 +2,25 @@ workdir: /srv/k8s-clusters
 clusters:
     prod:
         properties:
-            ref: https://github.com/xebia-france/xebia-k8s-properties.git
-            tag: v1.0
+            git: git@github.com:xebia-france/xebia-k8s-properties.git
+            ref: master
             key: /local/path/to/the/key
+            path: prod
         provisioning:
-            ref: https://github.com/xebia-france/xebia-k8s.git
-            tag: v1.0
+            git: git@github.com:xebia-france/xebia-k8s.git
+            ref: master
         kubespray:
-            ref: https://github.com/kubernetes-incubator/kubespray.git
-            tag: v1.0
+            git: https://github.com/kubernetes-incubator/kubespray.git
+            ref: master
     dev:
         properties:
-            ref: https://github.com/xebia-france/xebia-k8s-properties.git
-            tag: v1.0
+            git: git@github.com:xebia-france/xebia-k8s-properties.git
+            ref: master
             key: /local/path/to/the/key
+            path: sandbox
         provisioning:
-            ref: https://github.com/xebia-france/xebia-k8s.git
-            tag: v1.0
+            git: git@github.com:xebia-france/xebia-k8s.git
+            ref: master
         kubespray:
-            ref: https://github.com/kubernetes-incubator/kubespray.git
-            tag: v1.0
+            git: https://github.com/kubernetes-incubator/kubespray.git
+            ref: master
