@@ -32,8 +32,7 @@ def syncFolder(cluster, folder, data):
     target = '{}/{}'.format(cache_dir.absolute(), data[folder]['path'] if 'path' in data[folder] else "")
     print(cache_dir)
     if cache_dir.exists():
-        with cache_dir:
-            os.system('git pull -f')
+        os.system(f'cd {cache_dir.absolute()} && git fetch origin {data[folder]["ref"]} && git reset --hard FETCH_HEAD')
     else:
         os.system(f'git clone -b {data[folder]["ref"]} --single-branch {data[folder]["git"]} {cache_dir}')
 
